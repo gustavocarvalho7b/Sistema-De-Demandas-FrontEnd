@@ -63,6 +63,7 @@
             textBoxNome.Name = "textBoxNome";
             textBoxNome.Size = new Size(279, 29);
             textBoxNome.TabIndex = 0;
+            textBoxNome.TextChanged += textBoxNome_TextChanged;
             // 
             // label1
             // 
@@ -261,6 +262,7 @@
             buttonTemporizador.TabIndex = 19;
             buttonTemporizador.Text = "Temporizador";
             buttonTemporizador.UseVisualStyleBackColor = false;
+            buttonTemporizador.Click += buttonTemporizador_Click;
             // 
             // richTextBoxDescricao
             // 
@@ -291,6 +293,7 @@
             buttonSave.TabIndex = 22;
             buttonSave.Text = "Salvar";
             buttonSave.UseVisualStyleBackColor = false;
+            buttonSave.Click += buttonSave_Click;
             // 
             // buttonClean
             // 
@@ -301,6 +304,7 @@
             buttonClean.TabIndex = 23;
             buttonClean.Text = "Limpar Tela";
             buttonClean.UseVisualStyleBackColor = false;
+            buttonClean.Click += buttonClean_Click;
             // 
             // label12
             // 
@@ -321,6 +325,7 @@
             richTextBoxHistorico.Size = new Size(837, 186);
             richTextBoxHistorico.TabIndex = 25;
             richTextBoxHistorico.Text = "";
+            richTextBoxHistorico.TextChanged += richTextBoxHistorico_TextChanged;
             // 
             // Program1
             // 
