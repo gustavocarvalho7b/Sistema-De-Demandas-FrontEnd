@@ -1,0 +1,17 @@
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\bin\Debug\net8.0-windows\NovoSistemadeDemandas.exe
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\bin\Debug\net8.0-windows\NovoSistemadeDemandas.deps.json
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\bin\Debug\net8.0-windows\NovoSistemadeDemandas.runtimeconfig.json
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\bin\Debug\net8.0-windows\NovoSistemadeDemandas.dll
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\bin\Debug\net8.0-windows\NovoSistemadeDemandas.pdb
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\obj\Debug\net8.0-windows\NovoSistemadeDemandas.csproj.GenerateResource.cache
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\obj\Debug\net8.0-windows\NovoSistemadeDemandas.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\obj\Debug\net8.0-windows\NovoSistemadeDemandas.AssemblyInfoInputs.cache
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\obj\Debug\net8.0-windows\NovoSistemadeDemandas.AssemblyInfo.cs
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\obj\Debug\net8.0-windows\NovoSistemadeDemandas.csproj.CoreCompileInputs.cache
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\obj\Debug\net8.0-windows\NovoSistemadeDemandas.dll
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\obj\Debug\net8.0-windows\refint\NovoSistemadeDemandas.dll
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\obj\Debug\net8.0-windows\NovoSistemadeDemandas.pdb
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\obj\Debug\net8.0-windows\NovoSistemadeDemandas.genruntimeconfig.cache
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\obj\Debug\net8.0-windows\ref\NovoSistemadeDemandas.dll
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\obj\Debug\net8.0-windows\NovoSistemadeDemandas.Program1.resources
+C:\Users\Embras\Desktop\PinkCode\Form\NovoSistemadeDemandas\obj\Debug\net8.0-windows\NovoSistemadeDemandas.Properties.Resources.resources
