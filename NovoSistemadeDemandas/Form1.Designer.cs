@@ -176,7 +176,7 @@
             comboBoxSigla.Font = new Font("Segoe UI", 12F);
             comboBoxSigla.FormattingEnabled = true;
             comboBoxSigla.Items.AddRange(new object[] { "PM", "CM", "IP", "SAU", "ETC" });
-            comboBoxSigla.Location = new Point(854, 82);
+            comboBoxSigla.Location = new Point(853, 82);
             comboBoxSigla.Name = "comboBoxSigla";
             comboBoxSigla.Size = new Size(74, 29);
             comboBoxSigla.TabIndex = 11;
@@ -232,6 +232,7 @@
             textBoxTempoInicio.Name = "textBoxTempoInicio";
             textBoxTempoInicio.Size = new Size(50, 29);
             textBoxTempoInicio.TabIndex = 16;
+            textBoxTempoInicio.Text = "00:00";
             // 
             // label10
             // 
@@ -252,6 +253,7 @@
             textBoxTempoTermino.Name = "textBoxTempoTermino";
             textBoxTempoTermino.Size = new Size(50, 29);
             textBoxTempoTermino.TabIndex = 18;
+            textBoxTempoTermino.Text = "00:00";
             // 
             // buttonTemporizador
             // 
