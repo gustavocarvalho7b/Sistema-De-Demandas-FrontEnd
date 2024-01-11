@@ -1,5 +1,8 @@
 using System.Reflection.Metadata.Ecma335;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using System.IO;
+using System.Windows.Forms;
 
 namespace NovoSistemadeDemandas
 {
@@ -15,16 +18,42 @@ namespace NovoSistemadeDemandas
         string descricao1 { get; set; }
         string sigla1 { get; set; }
         string resumo1 { get; set; }
+        string caminhoPasta { get; set; }
+
+        public static string caminho2 = "";
         public Program1()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
+            SetarPasta();
             AtualizarHistorico();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {     
+        }
+
+        private void SetarPasta()
+        {
+            try
+            {
+                string caminhoSetarBloco = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+                // Verificar se o diretório existe, se não, criar
+                Directory.CreateDirectory(caminhoSetarBloco);
+                // Criar o caminho completo do arquivo dentro da pasta "Documents"
+                string caminhoArquivo = Path.Combine(caminhoSetarBloco, "caminho_pasta.txt");
+                caminho2 = File.ReadAllText(caminhoArquivo); // Atribuir à propriedade da classe, não criar uma variável local
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                // Lidar com a exceção
+                MessageBox.Show($"Erro de permissão: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                // Lidar com outras exceções
+                MessageBox.Show($"Erro inesperado: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void textBoxNome_TextChanged(object sender, EventArgs e)
         {
 
@@ -56,15 +85,16 @@ namespace NovoSistemadeDemandas
             }
         }
         private void AtualizarHistorico()
-        {
-            string ano = DateTime.Now.Year.ToString();
-            string mes = DateTime.Now.ToString("MM.yyyy");
-            string dia = DateTime.Now.ToString("dd.MM.yyyy");
+        {    
+            
+             string ano = DateTime.Now.Year.ToString();
+             string mes = DateTime.Now.ToString("MM.yyyy");
+             string dia = DateTime.Now.ToString("dd.MM.yyyy");
 
-            string diretorioBase = @"C:\Users\Embras\Desktop\PinkCode\DestinoAtendimentos";
-            string diretorioAno = Path.Combine(diretorioBase, ano);
-            string diretorioMes = Path.Combine(diretorioAno, mes);
-            string caminhoBlocoNotas = Path.Combine(diretorioMes, $"{dia}.txt");
+
+             string diretorioAno = Path.Combine(caminho2, ano);
+             string diretorioMes = Path.Combine(diretorioAno, mes);
+             string caminhoBlocoNotas = Path.Combine(diretorioMes, $"{dia}.txt");
 
             // Verifica se o arquivo existe antes de tentar lê-lo
             if (File.Exists(caminhoBlocoNotas))
@@ -88,9 +118,9 @@ namespace NovoSistemadeDemandas
                     string conexao = ExtrairCampo(match.Value, "Conexão:");
                     string horario = ExtrairCampo(match.Value, "Horario:");
                     string modulo = ExtrairCampo(match.Value, "Modulo:");
-               
+
                     // Formato desejado para armazenar na lista
-                    string formatoDesejado = $"{nome} - {modulo} {entidade} - {conexao} - {horario}";
+                    string formatoDesejado = $"{nome} - {modulo} - {entidade} - {conexao} - {horario}";
 
                     // Adiciona o atendimento no novo formato à lista
                     atendimentos.Add(formatoDesejado);
@@ -137,9 +167,10 @@ namespace NovoSistemadeDemandas
                 $" ~ {tempoFinal1}\nModulo: {modulo1}\nE-mail: {email1}\nDescrição: {descricao1}\n\n------------------------------" +
                 $"------------------------------------------\n\n");
 
-            salvarAtendimento(blocoTexto1);
-
             AtualizarHistorico();
+            salvarAtendimento(blocoTexto1);
+            limparCampos();
+
         }
 
         private void salvarAtendimento(string blocoTexto1)
@@ -148,10 +179,8 @@ namespace NovoSistemadeDemandas
             string mes = DateTime.Now.ToString("MM.yyyy");
             string dia = DateTime.Now.ToString("dd.MM.yyyy");
 
-            string diretorioBase = @"C:\Users\Embras\Desktop\PinkCode\DestinoAtendimentos";
-
             // Caminho para o diretório do ano
-            string diretorioAno = Path.Combine(diretorioBase, ano);
+            string diretorioAno = Path.Combine(caminho2, ano);
 
             // Caminho para o diretório do mês
             string diretorioMes = Path.Combine(diretorioAno, mes);
@@ -159,16 +188,16 @@ namespace NovoSistemadeDemandas
             // Caminho para o arquivo de bloco de notas do dia
             string caminhoBlocoNotas = Path.Combine(diretorioMes, $"{dia}.txt");
 
-            Directory.CreateDirectory(diretorioBase);
+            Directory.CreateDirectory(caminho2);
             Directory.CreateDirectory(diretorioAno);
             Directory.CreateDirectory(diretorioMes);
 
             // Escreve os dados do atendimento no arquivo de bloco de notas
             File.AppendAllText(caminhoBlocoNotas, blocoTexto1);
+            AtualizarHistorico();
 
         }
-
-        private void buttonClean_Click(object sender, EventArgs e)
+        private void limparCampos()
         {
             foreach (Control control in this.Controls)
             {
@@ -182,6 +211,7 @@ namespace NovoSistemadeDemandas
                 {
                     // Limpa a seleção do ComboBox
                     ((ComboBox)control).SelectedIndex = -1;
+                    comboBoxModulo.SelectedIndex = -1;
                 }
                 else if (control is RichTextBox)
                 {
@@ -192,6 +222,26 @@ namespace NovoSistemadeDemandas
                 textBoxTempoTermino.Text = "00:00";
                 AtualizarHistorico();
             }
+        }
+
+        private void buttonClean_Click(object sender, EventArgs e)
+        {
+            limparCampos();       
+        }
+
+        private void label13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.relogio.Text = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
+        }
+
+        private void exibirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
