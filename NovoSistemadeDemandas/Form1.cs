@@ -19,8 +19,10 @@ namespace NovoSistemadeDemandas
         string sigla1 { get; set; }
         string resumo1 { get; set; }
         string caminhoPasta { get; set; }
-
         public static string caminho2 = "";
+        public static string caminhoSetarBloco = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+        public static string caminhoArquivo = Path.Combine(caminhoSetarBloco, "caminho_pasta.txt");
+
         public Program1()
         {
             InitializeComponent();
@@ -29,28 +31,28 @@ namespace NovoSistemadeDemandas
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {     
+        {
         }
 
         private void SetarPasta()
         {
             try
             {
-                string caminhoSetarBloco = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+                caminhoSetarBloco = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
                 // Verificar se o diretório existe, se não, criar
                 Directory.CreateDirectory(caminhoSetarBloco);
                 // Criar o caminho completo do arquivo dentro da pasta "Documents"
-                string caminhoArquivo = Path.Combine(caminhoSetarBloco, "caminho_pasta.txt");
-                caminho2 = File.ReadAllText(caminhoArquivo); // Atribuir à propriedade da classe, não criar uma variável local
+                caminhoArquivo = Path.Combine(caminhoSetarBloco, "caminho_pasta.txt");
+                caminho2 = File.ReadAllText(caminhoArquivo);
             }
             catch (UnauthorizedAccessException ex)
             {
-                // Lidar com a exceção
+
                 MessageBox.Show($"Erro de permissão: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                // Lidar com outras exceções
+
                 MessageBox.Show($"Erro inesperado: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -85,16 +87,16 @@ namespace NovoSistemadeDemandas
             }
         }
         private void AtualizarHistorico()
-        {    
-            
-             string ano = DateTime.Now.Year.ToString();
-             string mes = DateTime.Now.ToString("MM.yyyy");
-             string dia = DateTime.Now.ToString("dd.MM.yyyy");
+        {
+
+            string ano = DateTime.Now.Year.ToString();
+            string mes = DateTime.Now.ToString("MM.yyyy");
+            string dia = DateTime.Now.ToString("dd.MM.yyyy");
 
 
-             string diretorioAno = Path.Combine(caminho2, ano);
-             string diretorioMes = Path.Combine(diretorioAno, mes);
-             string caminhoBlocoNotas = Path.Combine(diretorioMes, $"{dia}.txt");
+            string diretorioAno = Path.Combine(caminho2, ano);
+            string diretorioMes = Path.Combine(diretorioAno, mes);
+            string caminhoBlocoNotas = Path.Combine(diretorioMes, $"{dia}.txt");
 
             // Verifica se o arquivo existe antes de tentar lê-lo
             if (File.Exists(caminhoBlocoNotas))
@@ -226,7 +228,7 @@ namespace NovoSistemadeDemandas
 
         private void buttonClean_Click(object sender, EventArgs e)
         {
-            limparCampos();       
+            limparCampos();
         }
 
         private void label13_Click(object sender, EventArgs e)
@@ -243,5 +245,55 @@ namespace NovoSistemadeDemandas
         {
 
         }
+
+        private void localizarPastaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"        A pasta destino dos arquivos de demandas é:\n{caminho2}");
+        }
+
+        private void setarPastaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new FolderBrowserDialog())
+            {
+                // Configurar o diálogo
+                dialog.Description = "Escolha um destino";
+                dialog.ShowNewFolderButton = true;
+
+                // Exibir o diálogo
+                DialogResult resultado = dialog.ShowDialog();
+                if (resultado == DialogResult.OK)
+                {
+                    // Obtém o caminho selecionado pelo usuário
+                    string novoCaminho = dialog.SelectedPath;
+
+                    // Chama a função para trocar o destino da pasta
+                    TrocarPastaDestino(novoCaminho);
+                }
+            }
+        }
+        private void TrocarPastaDestino(string novoCaminho)
+        {
+            try
+            {
+                // Limpa o conteúdo do arquivo
+                File.WriteAllText(caminhoArquivo, string.Empty);
+
+                // Escreve o novo caminho no arquivo
+                File.WriteAllText(caminhoArquivo, novoCaminho);
+
+                // Atualiza a variável caminho2
+                caminho2 = novoCaminho;
+
+                // Atualiza o histórico
+                AtualizarHistorico();
+
+                MessageBox.Show("Pasta destino alterada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao trocar o destino da pasta: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
+
 }

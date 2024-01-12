@@ -368,21 +368,23 @@
             // 
             exibirToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { localizarPastaToolStripMenuItem, setarPastaToolStripMenuItem });
             exibirToolStripMenuItem.Name = "exibirToolStripMenuItem";
-            exibirToolStripMenuItem.Size = new Size(48, 20);
-            exibirToolStripMenuItem.Text = "Exibir";
+            exibirToolStripMenuItem.Size = new Size(61, 20);
+            exibirToolStripMenuItem.Text = "Arquivo";
             exibirToolStripMenuItem.Click += exibirToolStripMenuItem_Click;
             // 
             // localizarPastaToolStripMenuItem
             // 
             localizarPastaToolStripMenuItem.Name = "localizarPastaToolStripMenuItem";
-            localizarPastaToolStripMenuItem.Size = new Size(151, 22);
+            localizarPastaToolStripMenuItem.Size = new Size(180, 22);
             localizarPastaToolStripMenuItem.Text = "Localizar Pasta";
+            localizarPastaToolStripMenuItem.Click += localizarPastaToolStripMenuItem_Click;
             // 
             // setarPastaToolStripMenuItem
             // 
             setarPastaToolStripMenuItem.Name = "setarPastaToolStripMenuItem";
-            setarPastaToolStripMenuItem.Size = new Size(151, 22);
+            setarPastaToolStripMenuItem.Size = new Size(180, 22);
             setarPastaToolStripMenuItem.Text = "Setar Pasta";
+            setarPastaToolStripMenuItem.Click += setarPastaToolStripMenuItem_Click;
             // 
             // Program1
             // 
